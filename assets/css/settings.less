@@ -1,0 +1,204 @@
+@import "variable.less";
+
+#settings {
+    width: 0;
+    height: 0;
+    left: 50%;
+    top: calc(50% + (@barTopHeight / 2));
+    transform: translate(-50%, -50%);
+    position: absolute;
+    z-index: @settingsZIndex;
+    overflow: hidden;
+    opacity: 0;
+    font-size: 0;
+}
+
+@keyframes removeSettings {
+    0% {
+        width: @settingsWidth;
+        height: @settingsHeight;
+        opacity: 1;
+        font-size: 100%;
+    }
+
+    70% {
+        opacity: 0;
+    }
+
+    100% {
+        width: 0;
+        height: 0;
+        opacity: 0;
+        font-size: 0;
+    }
+}
+
+@keyframes showSettings {
+    0% {
+        width: 0;
+        height: 0;
+        opacity: 0;
+        font-size: 0;
+    }
+
+    100% {
+        width: @settingsWidth;
+        height: @settingsHeight;
+        opacity: 1;
+        font-size: 100%;
+    }
+}
+
+/*--------------*/
+
+#settings #categories {
+    width: calc(@categoriesWidth - (@globalMarginPadding * 2));
+    height: calc(100% - (@globalMarginPadding * 2));
+    background-color: @color2;
+    border-bottom-left-radius: @globalRadius;
+    border-top-left-radius: @globalRadius;
+    padding: @globalMarginPadding;
+    position: absolute;
+    overflow: hidden;
+}
+
+/*--------------*/
+
+#settings .category {
+    cursor: pointer;
+}
+
+#settings .category input {
+    display: none;
+}
+
+#settings .category .checkmark {
+    padding: @globalMarginPadding;
+}
+
+#settings .category input:checked~.checkmark {
+    background-color: @color1;
+    border-radius: @categoriesZIndexRadius;
+}
+
+#settings .category .checkmark p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: center;
+    font-size: 100%;
+}
+
+/*--------------*/
+
+#settings .content {
+    width: calc(@contentWidth - (@globalMarginPadding * 2));
+    height: calc(100% - (@globalMarginPadding * 2));
+    position: absolute;
+    right: 0;
+    padding: @globalMarginPadding;
+    overflow: hidden;
+    background-color: @color3;
+    border-bottom-right-radius: @globalRadius;
+    border-top-right-radius: @globalRadius;
+    display: none;
+}
+
+#settings .content[active=true] {
+    display: block;
+}
+
+#settings .content .close-settings {
+    font-size: 115%;
+    position: absolute;
+    right: @globalMarginPadding;
+    color: @color4;
+}
+
+#settings .content .close-settings:hover {
+    color: @color5;
+}
+
+#settings .content h1 {
+    font-size: 115%;
+    text-align: center;
+    margin-bottom: 3%;
+}
+
+#settings .content p {
+    display: inline-flex;
+    font-size: 104%;
+    color: @color5
+}
+
+#settings .content button {
+    font-size: 115%;
+    color: @color4;
+}
+
+#settings .content button:hover {
+    color: @color5;
+}
+
+/*--------------*/
+
+#settings .content#lang-category-content p {
+    position: absolute;
+    cursor: pointer;
+}
+
+#settings .select-lang {
+    cursor: pointer;
+    position: relative;
+    display: inline-flex;
+    margin-right: 2%;
+}
+
+#settings .select-lang input {
+    display: none;
+}
+
+#settings .select-lang .checkmark {
+    height: 1em;
+    width: 1em;
+    background-color: @color2;
+    border-radius: 50%;
+    font-size: 165%;
+}
+
+#settings .select-lang .checkmark:after {
+    content: "";
+    position: absolute;
+    opacity: 0;
+    top: 50%;
+    left: 50%;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    background: @color1;
+    font-size: 32%;
+    transform: translate(-50%, -50%);
+}
+
+#settings .select-lang input:checked~.checkmark:after {
+    opacity: 1;
+}
+
+/*--------------*/
+
+#settings .content #reset-settings-button-spin {
+    cursor: default;
+    animation: spinResetButton 1s ease;
+    color: @color5;
+    font-size: 105%;
+}
+
+@keyframes spinResetButton {
+    0% {
+        transform: rotate(0deg)
+    }
+
+    100% {
+        transform: rotate(360deg)
+    }
+}

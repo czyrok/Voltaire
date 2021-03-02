@@ -1,0 +1,27 @@
+{
+  "name": "Voltaire",
+  "version": "1.0.0",
+  "description": "Code editor",
+  "main": "./assets/app.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --debug"
+  },
+  "author": "czyrok",
+  "license": "LICENSE.txt",
+  "keywords": [
+    "${name}",
+    "${description}",
+    "${author}"
+  ],
+  "devDependencies": {
+    "electron": "^11.1.0",
+    "electron-builder": "^22.9.1"
+  },
+  "dependencies": {
+    "dragula": "^3.7.3",
+    "electron-context-menu": "^2.3.0",
+    "electron-localshortcut": "^3.2.1",
+    "jquery": "^3.5.1"
+  }
+}

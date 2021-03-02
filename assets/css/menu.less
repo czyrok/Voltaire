@@ -1,0 +1,55 @@
+@import "variable.less";
+
+#menu {
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+@keyframes showMenu {
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 0;
+    }
+}
+
+@keyframes removeMenu {
+    0% {
+        left: 0;
+    }
+
+    100% {
+        left: -100%;
+    }
+}
+
+#menu .bar-top {
+    padding-left: @barTopLeft;
+    width: calc(100% - @barTopLeft);
+}
+
+#menu .tab {
+    cursor: default;
+}
+
+#menu .tab p {
+    width: @tabWidth - (2 * @globalMarginPadding);
+}
+
+#menu #menu-button {
+    right: 0;
+}
+
+#menu .bottom-area #settings-button {
+    width: 30px;
+    height: 30px;
+    font-size: 26px;
+    position: absolute;
+    transform: translateX(-50%);
+    bottom: 0;
+    left: 50%;
+}

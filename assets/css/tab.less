@@ -1,0 +1,88 @@
+@import "variable.less";
+
+.tab {
+    margin-top: @barTopHeight - @tabHeight;
+    width: auto;
+    max-width: @tabWidth;
+    height: @tabHeight;
+    display: inline-flex;
+    position: sticky;
+    cursor: pointer;
+}
+
+.tab[active=true] {
+    z-index: 1;
+}
+
+.tab+.tab {
+    margin-left: 25px;
+}
+
+.tab input {
+    display: none;
+}
+
+.tab .checkmark {
+    width: @tabWidth;
+    height: @tabHeight;
+    background-color: @color2;
+    position: absolute;
+}
+
+.tab .checkmark::before {
+    content: '';
+    position: absolute;
+    top: @afterBeforeTabTop;
+    width: @tabHeight;
+    height: 50px;
+    background-color: @color2;
+    transform: rotate(30deg);
+    margin-left: -15px;
+}
+
+.tab .checkmark::after {
+    content: '';
+    position: absolute;
+    top: @afterBeforeTabTop;
+    width: @tabHeight;
+    height: 50px;
+    background-color: @color2;
+    transform: rotate(-30deg);
+    margin-left: 135px;
+}
+
+.tab input:checked~.checkmark {
+    position: absolute;
+    background-color: @color1;
+}
+
+.tab input:checked~.checkmark::before {
+    background-color: @color1;
+}
+
+.tab input:checked~.checkmark::after {
+    background-color: @color1;
+}
+
+.tab p {
+    width: @pTabWidth;
+    font-size: 14px;
+    margin: @globalMarginPadding;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    z-index: 1;
+}
+
+.tab button {
+    margin: @globalMarginPadding;
+    width: @buttonTabSize;
+    height: @buttonTabSize;
+    font-size: 15px;
+    z-index: 1;
+    color: @color3;
+}
+
+.tab button:hover {
+    color: @color4;
+}

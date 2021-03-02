@@ -1,0 +1,64 @@
+<div id="settings">
+    <div id="categories">
+        <label class="category">
+            <input id="default" type="radio" name="settings" checked="true"
+                onclick="setActiveSettingsCategoryContent('lang-category-content')">
+
+            <div class="checkmark">
+                <p id="settings.lang.category">
+                    Language
+                </p>
+            </div>
+        </label>
+
+        <label class="category">
+            <input type="radio" name="settings" onclick="setActiveSettingsCategoryContent('settings-category-content')">
+
+            <div class="checkmark">
+                <p id="settings.settings.category">
+                    Settings
+                </p>
+            </div>
+        </label>
+    </div>
+
+    <div class="content" id="lang-category-content" active="true">
+        <button class="icofont-close close-settings" onclick="removeSettings()"></button>
+
+        <h1 id="settings.lang.title">
+            Default language
+        </h1>
+
+        <label class="select-lang">
+            <input id="en" type="radio" name="lang" onclick="applyChangeLang('en')">
+
+            <div class="checkmark"></div>
+        </label>
+
+        <p onclick="applyChangeLang('en')">English</p>
+
+        <br>
+
+        <label class="select-lang">
+            <input id="fr" type="radio" name="lang" onclick="applyChangeLang('fr')">
+
+            <div class="checkmark"></div>
+        </label>
+
+        <p onclick="applyChangeLang('fr')">Français</p>
+    </div>
+
+    <div class="content" id="settings-category-content">
+        <button class="icofont-close close-settings" onclick="removeSettings()"></button>
+
+        <h1 id="settings.settings.title">
+            Settings
+        </h1>
+
+        <p id="settings.settings.reset">
+            Reset settings
+        </p>
+
+        <button class="icofont-spinner-alt-3" id="reset-settings-button" onclick="resetSettings()"></button>
+    </div>
+</div>

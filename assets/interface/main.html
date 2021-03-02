@@ -1,0 +1,50 @@
+<div id="main">
+    <div class="bar-top">
+        <div id="font">
+            <button class="icofont-caret-right" id="menu-button" onclick="showRemoveMenu()"></button>
+        </div>
+
+        <div id="tab-area">
+            <label class="tab" id="tab1">
+                <input type="radio" name="tab" onclick="setActiveTab('tab1')">
+                <div class="checkmark"></div>
+
+                <p>
+                    style.less
+                </p>
+
+                <button class="icofont-close"></button>
+            </label>
+            <label class="tab" id="tab2">
+                <input type="radio" name="tab" onclick="setActiveTab('tab2')">
+                <div class="checkmark"></div>
+
+                <p>
+                    index.html
+                </p>
+
+                <button class="icofont-close"></button>
+            </label>
+            <label class="tab" id="tab3">
+                <input type="radio" name="tab" onclick="setActiveTab('tab3')">
+                <div class="checkmark"></div>
+
+                <p>
+                    app.js
+                </p>
+
+                <button class="icofont-close"></button>
+            </label>
+        </div>
+    </div>
+
+    <div class="bottom-area">
+        <div id="code-line-bar">
+
+        </div>
+
+        <div id="text-area" contenteditable="true">
+
+        </div>
+    </div>
+</div>
