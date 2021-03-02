@@ -4,11 +4,9 @@ Voltaire is a code editor made with the Framework Electron.
 
 ## How to start it?
 
-* npm i
-To install packages
+* npm i => to install packages
 
-* npm start or npm run dev
-To start the app
+* npm start or npm run dev => to start the app
 
 ## Author
 
