@@ -1,0 +1,107 @@
+@import "global.less";
+
+#main {
+    right: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    animation: test 0.5s ease forwards;
+}
+
+@keyframes showMain {
+    0% {
+        right: -100%;
+    }
+
+    100% {
+        right: 0;
+    }
+}
+
+@keyframes removeMain {
+    0% {
+        right: 0;
+    }
+
+    100% {
+        right: -100%;
+    }
+}
+
+#main .bar-top #font {
+    position: absolute;
+    left: 0;
+    width: @barTopLeft * 0.7%;
+    height: @barTopHeight;
+    background: linear-gradient(to right, @color3, @color3, @color3, transparent);
+    z-index: @fontZIndex;
+}
+
+#main #tab-area {
+    display: flex;
+    overflow: scroll hidden;
+    padding-left: @barTopLeft;
+    width: calc(100% - @barTopLeft);
+    z-index: @tabAreaZIndex;
+}
+
+#main #tab-area::-webkit-scrollbar {
+    display: none;
+}
+
+#main #code-line-bar {
+    width: @codeLineWidth;
+    height: calc(100% - @bottomPaddingArea);
+    overflow: hidden;
+    overflow-y: auto;
+    padding-bottom: @bottomPaddingArea;
+    font-family: @font2;
+}
+
+#main #code-line-bar::-webkit-scrollbar {
+    display: none;
+}
+
+#main #code-line-bar div {
+    width: @codeLineWidth;
+    text-align: right;
+    color: @color3;
+    font-size: 16px;
+    height: @textAreaLineHeight;
+}
+
+#main #code-line-bar div[active] {
+    background-color: @color2;
+}
+
+#main #text-area {
+    width: calc(100% - @globalMarginPadding - @codeLineWidth);
+    height: calc(100% - @bottomPaddingArea);
+    color: @color5;
+    overflow: auto hidden;
+    white-space: nowrap;
+    padding-bottom: @bottomPaddingArea;
+}
+
+#main #text-area::-webkit-scrollbar {
+    width: @scrollBarSize;
+    height: @scrollBarSize;
+}
+
+#main #text-area::-webkit-scrollbar-corner {
+    background-color: transparent;
+}
+
+#main #text-area::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+#main #text-area::-webkit-scrollbar-thumb {
+    background-color: @color3;
+    border-radius: @scrollBarRadius;
+}
+
+#main #text-area::-webkit-scrollbar-thumb:hover {
+    background-color: @color4;
+}

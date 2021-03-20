@@ -1,4 +1,4 @@
-const langMenuProcess = require('../interface/lang.js')
+const langProcess = require('../lang.js')
 
 module.exports.template = function (language) {
     let template = {
@@ -12,58 +12,50 @@ module.exports.template = function (language) {
         showSaveLinkAs: false,
         showServices: false,
         labels: {
-            cut: langMenuProcess.lang[language]['menu']['edit']['cut'],
-            copy: langMenuProcess.lang[language]['menu']['edit']['copy'],
-            paste: langMenuProcess.lang[language]['menu']['edit']['paste'],
-            inspect: langMenuProcess.lang[language]['menu']['edit']['inspect']
+            cut: langProcess.lang[language]['menu']['edit']['cut'],
+            copy: langProcess.lang[language]['menu']['edit']['copy'],
+            paste: langProcess.lang[language]['menu']['edit']['paste'],
+            inspect: langProcess.lang[language]['menu']['edit']['inspect']
         },
         menu: (act, param) => [
             {
-                label: langMenuProcess.lang[language]['menu']['edit']['undo'],
+                label: langProcess.lang[language]['menu']['edit']['undo'],
                 visible: param.editFlags.canUndo,
                 accelerator: 'CommandOrControl+Z',
                 role: 'undo'
             },
             {
-                label: langMenuProcess.lang[language]['menu']['edit']['redo'],
+                label: langProcess.lang[language]['menu']['edit']['redo'],
                 visible: param.editFlags.canRedo,
                 accelerator: 'CommandOrControl+Y',
                 role: 'redo'
             },
             act.separator(),
             {
-                label: langMenuProcess.lang[language]['menu']['edit']['select'],
+                label: langProcess.lang[language]['menu']['edit']['select'],
                 visible: param.isEditable,
                 accelerator: 'CommandOrControl+A',
                 role: 'selectAll'
             },
             act.separator(),
             {
-                label: langMenuProcess.lang[language]['menu']['edit']['cut'],
+                label: langProcess.lang[language]['menu']['edit']['cut'],
                 visible: param.editFlags.canCut,
                 accelerator: 'CommandOrControl+X',
                 role: 'cut'
             },
             {
-                label: langMenuProcess.lang[language]['menu']['edit']['copy'],
+                label: langProcess.lang[language]['menu']['edit']['copy'],
                 visible: param.editFlags.canCopy,
                 accelerator: 'CommandOrControl+C',
                 role: 'copy'
             },
             {
-                label: langMenuProcess.lang[language]['menu']['edit']['paste'],
+                label: langProcess.lang[language]['menu']['edit']['paste'],
                 visible: param.isEditable,
                 accelerator: 'CommandOrControl+V',
                 role: 'paste'
             },
-            act.separator(),
-            {
-                label: langMenuProcess.lang[language]['menu']['app']['settings'],
-                accelerator: 'CommandOrControl+,',
-                click: () => {
-                    if (settingsAreShowed == 0) showSettings()
-                }
-            }
         ]
     }
 

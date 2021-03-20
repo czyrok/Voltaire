@@ -1,14 +1,16 @@
 const { app } = require('electron'),
-    appProcess = require('../app.js'),
-    langMenuProcess = require('../interface/lang.js')
+
+    appProcess = require('../../app.js'),
+    globalProcess = require('../global.js'),
+    langProcess = require('../lang.js')
 
 module.exports.template = function (language) {
     let template = [
         {
-            label: app.getName(),
+            label: globalProcess.darwin ? app.getName() : langProcess.lang[language]['menu']['app']['title'],
             submenu: [
                 {
-                    label: langMenuProcess.lang[language]['menu']['app']['new-window'],
+                    label: langProcess.lang[language]['menu']['app']['new-window'],
                     accelerator: 'CommandOrControl+Shift+N',
                     click() {
                         appProcess.activating()
@@ -16,14 +18,14 @@ module.exports.template = function (language) {
                 },
                 { type: 'separator' },
                 {
-                    label: langMenuProcess.lang[language]['menu']['app']['recent-files'],
+                    label: langProcess.lang[language]['menu']['app']['recent-files'],
                     accelerator: 'CommandOrControl+R',
                     click() {
                         appProcess.showMenu()
                     }
                 },
                 {
-                    label: langMenuProcess.lang[language]['menu']['app']['settings'],
+                    label: langProcess.lang[language]['menu']['app']['settings'],
                     accelerator: 'CommandOrControl+,',
                     click() {
                         appProcess.showSettings()
@@ -31,7 +33,7 @@ module.exports.template = function (language) {
                 },
                 { type: 'separator' },
                 {
-                    label: langMenuProcess.lang[language]['menu']['app']['exit'],
+                    label: langProcess.lang[language]['menu']['app']['exit'],
                     accelerator: 'CommandOrControl+W',
                     click() {
                         appProcess.quit()
@@ -40,37 +42,37 @@ module.exports.template = function (language) {
             ]
         },
         {
-            label: langMenuProcess.lang[language]['menu']['edit']['title'],
+            label: langProcess.lang[language]['menu']['edit']['title'],
             submenu: [
                 {
-                    label: langMenuProcess.lang[language]['menu']['edit']['undo'],
+                    label: langProcess.lang[language]['menu']['edit']['undo'],
                     accelerator: 'CommandOrControl+Z',
                     role: 'undo'
                 },
                 {
-                    label: langMenuProcess.lang[language]['menu']['edit']['redo'],
+                    label: langProcess.lang[language]['menu']['edit']['redo'],
                     accelerator: 'CommandOrControl+Y',
                     role: 'redo'
                 },
                 { type: 'separator' },
                 {
-                    label: langMenuProcess.lang[language]['menu']['edit']['select'],
+                    label: langProcess.lang[language]['menu']['edit']['select'],
                     accelerator: 'CommandOrControl+A',
                     role: 'selectAll'
                 },
                 { type: 'separator' },
                 {
-                    label: langMenuProcess.lang[language]['menu']['edit']['cut'],
+                    label: langProcess.lang[language]['menu']['edit']['cut'],
                     accelerator: 'CommandOrControl+X',
                     role: 'cut'
                 },
                 {
-                    label: langMenuProcess.lang[language]['menu']['edit']['copy'],
+                    label: langProcess.lang[language]['menu']['edit']['copy'],
                     accelerator: 'CommandOrControl+C',
                     role: 'copy'
                 },
                 {
-                    label: langMenuProcess.lang[language]['menu']['edit']['paste'],
+                    label: langProcess.lang[language]['menu']['edit']['paste'],
                     accelerator: 'CommandOrControl+V',
                     role: 'paste'
                 }

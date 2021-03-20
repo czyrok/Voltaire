@@ -29,16 +29,16 @@ function applyChangeLang(language) {
         if (appLang !== undefined) delete electronContextMenu()
         electronContextMenu(contextMenuProcess.template(language))
 
-        byID('interface.menu.title').textContent = langInterfaceProcess.lang[language]['interface']['menu']['title']
+        byID('interface.menu.title').textContent = langProcess.lang[language]['interface']['menu']['title']
 
-        byID('settings.lang.category').textContent = langInterfaceProcess.lang[language]['settings']['lang']['category']
-        byID('settings.lang.title').textContent = langInterfaceProcess.lang[language]['settings']['lang']['title']
+        byID('settings.lang.category').textContent = langProcess.lang[language]['settings']['lang']['category']
+        byID('settings.lang.title').textContent = langProcess.lang[language]['settings']['lang']['title']
 
-        byID('settings.settings.category').textContent = langInterfaceProcess.lang[language]['settings']['settings']['category']
-        byID('settings.settings.title').textContent = langInterfaceProcess.lang[language]['settings']['settings']['title']
-        byID('settings.settings.reset').textContent = langInterfaceProcess.lang[language]['settings']['settings']['reset']
+        byID('settings.settings.category').textContent = langProcess.lang[language]['settings']['settings']['category']
+        byID('settings.settings.title').textContent = langProcess.lang[language]['settings']['settings']['title']
+        byID('settings.settings.reset').textContent = langProcess.lang[language]['settings']['settings']['reset']
 
-        byID('interface.update').textContent = langInterfaceProcess.lang[language]['interface']['update']
+        byID('interface.update').textContent = langProcess.lang[language]['interface']['update']
 
         byID(language).checked = true
 
@@ -114,42 +114,35 @@ function setActiveSettingsCategoryContent(id) {
     currentSettingsCategoryContent = id
 }
 
-function checkCreateLine() {
-    let divList = byID('text-area').querySelectorAll('div')
+function createLine(e) {
+    if (e && e.offsetTop == lastLineTop && linesCount >= 1) return
 
-    if (
-        byID('text-area').innerHTML != lastTextArea
-        || win.getBounds().width != lastWinWidth
-    ) {
-        lastTextArea = byID('text-area').innerHTML
-        lastWinWidth = win.getNormalBounds().width
+    linesCount++
 
-        linesCount = 0
-        byID('code-line-bar').innerHTML = ''
+    let div = document.createElement('div')
+    div.setAttribute('id', linesCount)
+    div.textContent = linesCount
+    byID('code-line-bar').appendChild(div)
 
-        createLine()
+    $('#code-line-bar').scrollTop(lastScrollTop)
 
-        Array.prototype.forEach.call(divList, (e) => {
-            createLine(e)
-        })
+    if (e) {
+        lastLineTop = e.offsetTop
 
-        function createLine(e) {
-            if (e && e.offsetTop == lastLineTop) return
+        liColTextArea(true)
+    } else {
+        lastLineTop = 0
 
-            linesCount++
+        byID(`${linesCount}`).setAttribute('active', 'true')
+    }
+}
 
-            let div = document.createElement('div')
-            div.textContent = linesCount
+function setActiveCurrentLine(line) {
+    if (byID(`${line}`)) {
+        if (lastCurrentLine !== undefined && byID(`${lastCurrentLine}`)) byID(`${lastCurrentLine}`).removeAttribute('active')
 
-            if (e) {
-                div.style.top = `${e.offsetTop}px`
+        byID(`${line}`).setAttribute('active', 'true')
 
-                lastLineTop = e.offsetTop
-            } else {
-                lastLineTop = 0
-            }
-
-            byID('code-line-bar').appendChild(div)
-        }
+        lastCurrentLine = line
     }
 }

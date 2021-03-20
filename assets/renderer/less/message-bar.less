@@ -1,0 +1,22 @@
+@import "global.less";
+
+#message-bar {
+    width: 100%;
+    height: @messageBarSize;
+    background-color: @color3;
+    bottom: 0;
+    position: absolute;
+    display: grid;
+    font-family: @font2;
+    grid-template-areas: "a b c";
+    grid-auto-columns: 33.3%;
+}
+
+#message-bar #li-col {
+    display: inline-flex;
+}
+
+#message-bar #li-col p {
+    font-size: 12px;
+    margin: 2px;
+}

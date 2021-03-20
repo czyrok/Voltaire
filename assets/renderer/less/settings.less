@@ -1,16 +1,17 @@
-@import "variable.less";
+@import "global.less";
 
 #settings {
     width: 0;
     height: 0;
-    left: 50%;
-    top: calc(50% + (@barTopHeight / 2));
-    transform: translate(-50%, -50%);
-    position: absolute;
     z-index: @settingsZIndex;
     overflow: hidden;
     opacity: 0;
     font-size: 0;
+    display: inline-flex;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
 }
 
 @keyframes removeSettings {
@@ -21,8 +22,17 @@
         font-size: 100%;
     }
 
+    40% {
+        width: @settingsWidth + 25px;
+        height: @settingsHeight + 25px;
+        font-size: 110%;
+    }
+
     70% {
-        opacity: 0;
+        width: @settingsWidth;
+        height: @settingsHeight;
+        opacity: .8;
+        font-size: 100%;
     }
 
     100% {
@@ -41,6 +51,19 @@
         font-size: 0;
     }
 
+    30% {
+        width: @settingsWidth;
+        height: @settingsHeight;
+        opacity: .8;
+        font-size: 100%;
+    }
+
+    60% {
+        width: @settingsWidth + 10px;
+        height: @settingsHeight + 10px;
+        font-size: 104%;
+    }
+
     100% {
         width: @settingsWidth;
         height: @settingsHeight;
@@ -52,13 +75,12 @@
 /*--------------*/
 
 #settings #categories {
-    width: calc(@categoriesWidth - (@globalMarginPadding * 2));
-    height: calc(100% - (@globalMarginPadding * 2));
+    width: calc(@categoriesWidth - (@settingsMarginPadding * 2));
+    height: calc(100% - (@settingsMarginPadding * 2));
     background-color: @color2;
     border-bottom-left-radius: @globalRadius;
     border-top-left-radius: @globalRadius;
-    padding: @globalMarginPadding;
-    position: absolute;
+    padding: @settingsMarginPadding;
     overflow: hidden;
 }
 
@@ -73,7 +95,7 @@
 }
 
 #settings .category .checkmark {
-    padding: @globalMarginPadding;
+    padding: @settingsMarginPadding;
 }
 
 #settings .category input:checked~.checkmark {
@@ -92,11 +114,10 @@
 /*--------------*/
 
 #settings .content {
-    width: calc(@contentWidth - (@globalMarginPadding * 2));
-    height: calc(100% - (@globalMarginPadding * 2));
-    position: absolute;
+    width: calc(@contentWidth - (@settingsMarginPadding * 2));
+    height: calc(100% - (@settingsMarginPadding * 2));
     right: 0;
-    padding: @globalMarginPadding;
+    padding: @settingsMarginPadding;
     overflow: hidden;
     background-color: @color3;
     border-bottom-right-radius: @globalRadius;
@@ -109,9 +130,9 @@
 }
 
 #settings .content .close-settings {
-    font-size: 115%;
+    font-size: 1.15em;
     position: absolute;
-    right: @globalMarginPadding;
+    right: @settingsMarginPadding;
     color: @color4;
 }
 
@@ -120,19 +141,19 @@
 }
 
 #settings .content h1 {
-    font-size: 115%;
+    font-size: 1.15em;
     text-align: center;
-    margin-bottom: 3%;
+    margin-bottom: .3em;
 }
 
 #settings .content p {
     display: inline-flex;
-    font-size: 104%;
+    font-size: 1.04em;
     color: @color5
 }
 
 #settings .content button {
-    font-size: 115%;
+    font-size: 1.15em;
     color: @color4;
 }
 
@@ -151,7 +172,7 @@
     cursor: pointer;
     position: relative;
     display: inline-flex;
-    margin-right: 2%;
+    margin-right: .2em;
 }
 
 #settings .select-lang input {
@@ -163,7 +184,7 @@
     width: 1em;
     background-color: @color2;
     border-radius: 50%;
-    font-size: 165%;
+    font-size: 1.5em;
 }
 
 #settings .select-lang .checkmark:after {
@@ -175,8 +196,8 @@
     width: 1em;
     height: 1em;
     border-radius: 50%;
-    background: @color1;
-    font-size: 32%;
+    background-color: @color1;
+    font-size: .32em;
     transform: translate(-50%, -50%);
 }
 
@@ -190,7 +211,6 @@
     cursor: default;
     animation: spinResetButton 1s ease;
     color: @color5;
-    font-size: 105%;
 }
 
 @keyframes spinResetButton {

@@ -26,16 +26,16 @@ ipcRenderer.on('update', (e, percent) => {
 	if (updateDownloadIsActive == 0) {
 		updateDownloadIsActive = 1
 
-		byID('circle').style.strokeDashoffset = 100 - percent
+		byID('circle').style.strokeDashoffset = 50 - percent
 
 		showRemoveUpdate()
-	} else if (percent == 100) {
+	} else if (percent == 50) {
 		byID('circle').style.strokeDashoffset = 0
 
 		setTimeout(() => {
 			if (updateIsShowed == 1) showRemoveUpdate()
 		}, 1e3)
 	} else {
-		byID('circle').style.strokeDashoffset = 100 - percent
+		byID('circle').style.strokeDashoffset = 50 - percent
 	}
 })

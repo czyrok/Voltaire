@@ -21,7 +21,7 @@
   "dependencies": {
     "dragula": "^3.7.3",
     "electron-context-menu": "^2.3.0",
-    "electron-localshortcut": "^3.2.1",
-    "jquery": "^3.5.1"
+    "jquery": "^3.5.1",
+    "ps-tree": "^1.2.0"
   }
 }

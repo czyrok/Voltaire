@@ -3,15 +3,15 @@
 	"productName": "Voltaire",
 	"artifactName": "${productName} Update Setup ${version}.${ext}",
 	"win": {
-		"icon": "assets/img/icons/icon.ico",
+		"icon": "assets/renderer/img/icons/icon.ico",
 		"target": [
 			"nsis"
 		]
 	},
 	"nsis": {
-		"installerIcon": "assets/img/icons/installer.ico",
-		"uninstallerIcon": "assets/img/icons/icon.ico",
-		"installerSidebar": "assets/img/sidebar/sidebar.bmp",
+		"installerIcon": "assets/renderer/img/icons/installer.ico",
+		"uninstallerIcon": "assets/renderer/img/icons/icon.ico",
+		"installerSidebar": "assets/renderer/img/sidebar/sidebar.bmp",
 		"uninstallDisplayName": "${productName}",
 		"oneClick": true,
 		"allowToChangeInstallationDirectory": false,

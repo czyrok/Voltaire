@@ -1,5 +1,3 @@
-setInterval(checkCreateLine, 50)
-
 function sendNewParameterFile() {
     if (canSendParameterFile == 1) {
         if (parameterFile['lang'] != appLang) {
@@ -9,8 +7,6 @@ function sendNewParameterFile() {
         }
     }
 }
-
-setInterval(sendNewParameterFile, 200)
 
 function sendNewWindowFile() {
     if (canSendWindowFile == 1) {
@@ -34,8 +30,6 @@ function sendNewWindowFile() {
     }
 }
 
-setInterval(sendNewWindowFile, 200)
-
 function detectIfWinIsMaximized() {
     if (win.isMaximized() === true && winIsMaximized == 0) {
 
@@ -46,4 +40,44 @@ function detectIfWinIsMaximized() {
     }
 }
 
-setInterval(detectIfWinIsMaximized, 200)
+function updateCodeLineBarNum() {
+    let divList = byID('text-area').querySelectorAll('div')
+
+    if (byID('text-area').innerHTML != lastInnerHTMLTextArea) {
+        lastInnerHTMLTextArea = byID('text-area').innerHTML
+
+        linesCount = 0
+        byID('code-line-bar').innerHTML = ''
+
+        if (divList.length == 0) createLine()
+
+        Array.prototype.forEach.call(divList, (e) => {
+            createLine(e)
+        })
+    }
+}
+
+function liColTextArea(forceLaunch) {
+    if ($('#text-area').is(":focus")) {
+        let textAreaRange = window.getSelection().getRangeAt(0)
+
+        if (textAreaRange != lastTextAreaRange || forceLaunch === true) {
+            let startSelectionDiv = textAreaRange.startContainer,
+                li = 1,
+                col = textAreaRange.startOffset + 1
+
+            lastTextAreaRange = textAreaRange
+
+            while (isNaN(startSelectionDiv.offsetTop)) {
+                startSelectionDiv = startSelectionDiv.parentNode
+            }
+
+            li = (startSelectionDiv.offsetTop / textAreaLineHeight) + 1
+
+            byID('code-line-li').textContent = `Li ${li},`
+            if (textAreaRange.startOffset !== undefined) byID('code-line-col').textContent = `col ${col}`
+
+            setActiveCurrentLine(li)
+        }
+    }
+}
