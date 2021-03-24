@@ -1,6 +1,6 @@
-let currentDate = new Date()
-let importLinks = document.querySelectorAll('link[rel="import"]')
-let importedFilesCount = 0
+let currentDate = new Date(),
+	importLinks = document.querySelectorAll('link[rel="import"]'),
+	importedFilesCount = 0
 
 if (importLinks.length <= 0) {
 	console.log('[No HTML file loaded]')
