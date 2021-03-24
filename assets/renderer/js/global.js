@@ -70,7 +70,7 @@ function qSelect(selector) {
     return document.querySelector(selector)
 }
 
-const cp = require('child_process')
+/* const cp = require('child_process')
 
 var child = cp.exec("cd C:\\Users\\czyro\\Disque nuagique\\Fichiers\\Projets\\App\\Synoko && node app", function (err, stdout) {
     if (err) console.error(err.code)
@@ -88,4 +88,4 @@ function trucc() {
             process.kill(p.PID)
         })
     })
-}
+} */
