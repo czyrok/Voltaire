@@ -72,8 +72,8 @@ function qSelect(selector) {
 
 /* const cp = require('child_process')
 
-var child = cp.exec("cd C:\\Users\\czyro\\Disque nuagique\\Fichiers\\Projets\\App\\Synoko && node app", function (err, stdout) {
-    if (err) console.error(err.code)
+var child = cp.exec("cd C:\\Users\\czyro\\Disque nuagique\\Fichiers\\Projets\\App\\Synoko && node app", function (error, stdout) {
+    if (error) console.error(error.code)
 })
 
 child.stdout.on('data', (chunk) => {
@@ -83,7 +83,7 @@ child.stdout.on('data', (chunk) => {
 const psTree = require('ps-tree')
 
 function trucc() {
-    psTree(child.pid, function (err, children) {
+    psTree(child.pid, function (error, children) {
         children.map(function (p) {
             process.kill(p.PID)
         })
