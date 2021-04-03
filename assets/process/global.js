@@ -54,8 +54,8 @@ module.exports.buildMenu = (language) => {
 module.exports.mkDir = (path) => {
     try {
         fs.mkdirSync(path)
-    } catch (err) {
-        if (err.code !== 'EEXIST') throw err
+    } catch (error) {
+        if (error.code !== 'EEXIST') throw error
     }
 }
 
