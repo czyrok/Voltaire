@@ -1,0 +1,144 @@
+<style>
+  .top-bar {
+    width: 100%;
+    height: <%= topBar.height %>px;
+    background-color: <%= global.colors.c %>;
+    display: flex;
+    overflow: auto hidden;
+  }
+
+  .menu-button {
+    margin: 5px;
+    width: 25px;
+    height: 25px;
+    font-size: 20px;
+    position: absolute;
+    color: <%= global.colors.d %>;
+  }
+
+  .menu-button:hover {
+    color: <%= global.colors.e %>;
+  }
+
+  .top-bar .tab-area {
+    display: flex;
+    overflow: scroll hidden;
+    padding-left: <%= topBar.left %>px;
+    width: calc(100% - <%= topBar.left %>px);
+    z-index: <%= global.zIndex.tab %>;
+  }
+
+  .top-bar .tab-area::-webkit-scrollbar {
+    display: none;
+  }
+
+  .bottom-area {
+    width: 100%;
+    height: calc(100% - <%= topBar.height %>px);
+    display: flex;
+    top: <%= topBar.height %>px;
+    background-color: <%= global.colors.a %>;
+    position: absolute;
+  }
+
+  .bottom-area .code-line-bar {
+    width: <%= bottomArea.codeLine.width %>px;
+    height: calc(100% - <%= bottomArea.padding %>px);
+    overflow: hidden;
+    overflow-y: auto;
+    padding-bottom: <%= bottomArea.padding %>px;
+    font-family: <%= global.fonts.b %>;
+  }
+
+  .bottom-area .code-line-bar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .bottom-area .code-line-bar div {
+    width: <%= bottomArea.codeLine.width %>px;
+    text-align: right;
+    color: <%= global.colors.c %>;
+    font-size: 16px;
+  }
+
+  .bottom-area .code-line-bar div[active] {
+    background-color: <%= global.colors.b %>;
+  }
+
+  .bottom-area .file-area {
+    width: calc(100% - <%= bottomArea.codeLine.width %>px);
+    height: 100%;
+    color: <%= global.colors.e %>;
+  }
+
+  #main .bottom-area .file-area {
+    font-family: <%= global.fonts.b %>;
+    z-index: 2;
+    /* color: transparent; */
+    caret-color: <%= global.colors.e %>;
+  }
+
+  .bottom-area .file-area .file {
+    width: 100%;
+    height: calc(100% - <%= bottomArea.padding %>px);
+    overflow: auto;
+    white-space: nowrap;
+    padding-bottom: <%= bottomArea.padding %>px;
+    display: none;
+    background: none;
+    padding: 0;
+  }
+
+  .bottom-area .file-area .file[active=true] {
+    display: block;
+  }
+
+  .bottom-area .file-area .file::-webkit-scrollbar {
+    width: <%= global.scrollBar.size %>px;
+    height: <%= global.scrollBar.size %>px;
+  }
+
+  .bottom-area .file-area .file::-webkit-scrollbar-corner {
+    background-color: transparent;
+  }
+
+  .bottom-area .file-area .file::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  .bottom-area .file-area .file::-webkit-scrollbar-thumb {
+    background-color: <%= global.colors.c %>;
+    border-radius: <%= global.scrollBar.radius %>px;
+  }
+
+  .bottom-area .file-area .file::-webkit-scrollbar-thumb:hover {
+    background-color: <%= global.colors.d %>;
+  }
+
+  #copie {
+    display: none;
+    width: calc(100% - <%= bottomArea.codeLine.width %>px);
+    height: calc(100% - <%= bottomArea.padding %>px);
+    overflow: auto;
+    white-space: pre-wrap;
+    padding-bottom: <%= bottomArea.padding %>px;
+    background: none;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    left: <%= bottomArea.codeLine.width %>px;
+    z-index: 1;
+    font-family: <%= global.fonts.b %>;
+    -webkit-user-modify: read-write;
+    overflow-wrap: break-word;
+    -webkit-line-break: after-white-space;
+  }
+
+  #copie::-webkit-scrollbar {
+    display: none;
+  }
+
+  #main .bottom-area .file-area .file::-webkit-scrollbar {
+    display: none;
+  }
+</style>

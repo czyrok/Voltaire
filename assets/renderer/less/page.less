@@ -1,0 +1,144 @@
+@import "./less-config.less";
+
+.top-bar {
+  width: 100%;
+  height: @topBarHeight;
+  background-color: @color3;
+  display: flex;
+  overflow: auto hidden;
+}
+
+.menu-button {
+  margin: 5px;
+  width: 25px;
+  height: 25px;
+  font-size: 20px;
+  position: absolute;
+  color: @color4;
+}
+
+.menu-button:hover {
+  color: @color5;
+}
+
+.top-bar .tab-area {
+  display: flex;
+  overflow: scroll hidden;
+  padding-left: @topBarLeft;
+  width: calc(100% - @topBarLeft);
+  z-index: @tabAreaZIndex;
+}
+
+.top-bar .tab-area::-webkit-scrollbar {
+  display: none;
+}
+
+.bottom-area {
+  width: 100%;
+  height: calc(100% - @topBarHeight);
+  display: flex;
+  top: @topBarHeight;
+  background-color: @color1;
+  position: absolute;
+}
+
+.bottom-area .code-line-bar {
+  width: @codeLineWidth;
+  height: calc(100% - @bottomPaddingArea);
+  overflow: hidden;
+  overflow-y: auto;
+  padding-bottom: @bottomPaddingArea;
+  font-family: @font2;
+}
+
+.bottom-area .code-line-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.bottom-area .code-line-bar div {
+  width: @codeLineWidth;
+  text-align: right;
+  color: @color3;
+  font-size: 16px;
+}
+
+.bottom-area .code-line-bar div[active] {
+  background-color: @color2;
+}
+
+.bottom-area .file-area {
+  width: calc(100% - @codeLineWidth);
+  height: 100%;
+  color: @color5;
+}
+
+#main .bottom-area .file-area {
+  font-family: @font2;
+  z-index: 2;
+  /* color: transparent; */
+  caret-color: @color5;
+}
+
+.bottom-area .file-area .file {
+  width: 100%;
+  height: calc(100% - @bottomPaddingArea);
+  overflow: auto;
+  white-space: nowrap;
+  padding-bottom: @bottomPaddingArea;
+  display: none;
+  background: none;
+  padding: 0;
+}
+
+.bottom-area .file-area .file[active=true] {
+  display: block;
+}
+
+.bottom-area .file-area .file::-webkit-scrollbar {
+  width: @scrollBarSize;
+  height: @scrollBarSize;
+}
+
+.bottom-area .file-area .file::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+.bottom-area .file-area .file::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.bottom-area .file-area .file::-webkit-scrollbar-thumb {
+  background-color: @color3;
+  border-radius: @scrollBarRadius;
+}
+
+.bottom-area .file-area .file::-webkit-scrollbar-thumb:hover {
+  background-color: @color4;
+}
+
+#copie {
+  width: calc(100% - @codeLineWidth);
+  height: calc(100% - @bottomPaddingArea);
+  overflow: auto;
+  white-space: pre-wrap;
+  padding-bottom: @bottomPaddingArea;
+  background: none;
+  padding: 0;
+  position: absolute;
+  display: none;
+  top: 0;
+  left: @codeLineWidth;
+  z-index: 1;
+  font-family: @font2;
+  -webkit-user-modify: read-write;
+  overflow-wrap: break-word;
+  -webkit-line-break: after-white-space;
+}
+
+#copie::-webkit-scrollbar {
+  display: none;
+}
+
+#main .bottom-area .file-area .file::-webkit-scrollbar {
+  display: none;
+}

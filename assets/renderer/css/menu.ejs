@@ -1,0 +1,45 @@
+<style>
+    #menu {
+        left: -<%= menu.width %>px;
+        width: <%= menu.width %>px;
+        height: calc(100% - <%= messageBar.height %>px);
+        position: absolute;
+    }
+
+    @keyframes showMenu {
+        0% {
+            left: -<%= menu.width %>px;
+        }
+
+        100% {
+            left: 0;
+        }
+    }
+
+    @keyframes removeMenu {
+        0% {
+            left: 0;
+        }
+
+        100% {
+            left: -<%= menu.width %>px;
+        }
+    }
+
+    #menu .menu-button {
+        right: 0;
+        top: 0;
+    }
+
+    #menu .top-bar .tab-area {
+        padding-left: 22px;
+    }
+
+    #menu .top-bar .tab-area .tab p {
+        width: <%= tab.width %>px;
+    }
+
+    #menu .bottom-area .file-area {
+        width: 100%;
+    }
+</style>

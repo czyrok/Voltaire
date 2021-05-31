@@ -1,0 +1,71 @@
+<style>
+    #main {
+        right: 0;
+        width: 100%;
+        height: calc(100% - <%= messageBar.height %>px);
+        position: absolute;
+    }
+
+    @keyframes showMain {
+        0% {
+            right: -<%= menu.width %>px;
+        }
+
+        100% {
+            right: 0;
+        }
+    }
+
+    @keyframes removeMain {
+        0% {
+            right: 0;
+        }
+
+        100% {
+            right: -<%= menu.width %>px;
+        }
+    }
+
+    #main-background {
+        width: 100%;
+        height: 100%;
+        background-color: #000;
+        position: absolute;
+        z-index: <%= global.zIndex.background %>;
+        opacity: 0.4;
+        display: none;
+    }
+
+    @keyframes showMainBackground {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 0.4;
+        }
+    }
+
+    @keyframes removeMainBackground {
+        0% {
+            opacity: 0.4;
+        }
+
+        100% {
+            opacity: 0;
+        }
+    }
+
+    #main .top-bar #font {
+        position: absolute;
+        left: 0;
+        width: <%= topBar.left %>px;
+        height: <%= topBar.height %>px;
+        background: linear-gradient(to right, <%= global.colors.c %>, <%= global.colors.c %> 45%, transparent 70%);
+        z-index: <%= global.zIndex.font %>;
+    }
+
+    #main .bottom-area .file-area .file {
+        white-space: pre-wrap;
+    }
+</style>

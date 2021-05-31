@@ -2,7 +2,7 @@
   "name": "Voltaire",
   "version": "1.0.0",
   "description": "Code editor",
-  "main": "./assets/app.js",
+  "main": "./assets/main/app.js",
   "scripts": {
     "start": "electron .",
     "dev": "electron . --debug"
@@ -20,8 +20,13 @@
   },
   "dependencies": {
     "dragula": "^3.7.3",
+    "ejs": "^3.1.6",
     "electron-context-menu": "^2.3.0",
     "jquery": "^3.5.1",
-    "ps-tree": "^1.2.0"
+    "jquery.caret": "^0.3.1",
+    "monaco-editor": "^0.24.0",
+    "prismjs": "^1.23.0",
+    "ps-tree": "^1.2.0",
+    "selection-range-enhancer": "^1.0.3"
   }
 }

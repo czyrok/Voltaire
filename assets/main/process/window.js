@@ -1,19 +1,23 @@
-const { app, session, BrowserWindow } = require('electron'),
+const { app, ipcMain, session, BrowserWindow } = require('electron'),
+    electronContextMenu = require('electron-context-menu'),
 
     globalProcess = require('./global.js'),
+    contextMenuProcess = require('./menu/context.js'),
 
     debug = /--debug/.test(process.argv[2])
 
 let win
 
 module.exports.createWindow = () => {
-    if (globalProcess.recoveredFilesCount == 3) {
+    if (globalProcess.recoveredFilesCount == globalProcess.filesSavedCount) {
         clearInterval(globalProcess.intervalWindow)
 
+        globalProcess.setWindowSettings()
+
         win = new BrowserWindow({
-            show: false,
+/*             show: false, */
             title: app.getName(),
-            icon: 'assets/renderer/img/icons/icon.ico',
+            icon: 'assets/img/icons/icon.ico',
             minWidth: globalProcess.minWidth,
             minHeight: globalProcess.minHeight,
             width: globalProcess.width,
@@ -29,12 +33,9 @@ module.exports.createWindow = () => {
 
         if (debug) win.webContents.openDevTools()
 
-        win.loadFile('assets/renderer/html/index.html')
+        win.loadFile('assets/renderer/html/init.html')
 
         win.once('ready-to-show', () => {
-            win.show()
-            win.focus()
-
             win.webContents.send('parameter-file', globalProcess.parameterFile)
             win.webContents.send('window-file', globalProcess.windowFile)
             win.webContents.send('recent-file', globalProcess.recentFile)
@@ -44,22 +45,21 @@ module.exports.createWindow = () => {
             const updateSession = session.fromPartition('update')
 
             if (globalProcess.updateDownloadIsFinish == 0 && globalProcess.updateDownloadIsActive == 0 && globalProcess.updateRetry == 0) {
-                // updateSession.downloadURL(globalProcess.updateURL)
+                /* updateSession.downloadURL(globalProcess.updateURL) */
             } else if (globalProcess.updateDownloadIsActive == 1) {
                 win.webContents.send('update', globalProcess.updatePercent)
             }
+
+            electronContextMenu(contextMenuProcess.template(globalProcess.parameterFile['lang'], win))
         })
 
         win.once('closed', () => {
             if (globalProcess.currentWindow == win) globalProcess.currentWindow = undefined
         })
 
-        /* electronLocalshortcut.register(win, 'Ctrl+Left', () => {
-            globalProcess.currentWindow.webContents.send('show-menu')
+        ipcMain.on('ready', () => {
+            win.show()
+            win.focus()
         })
-
-        electronLocalshortcut.register(win, 'Ctrl+Right', () => {
-            globalProcess.currentWindow.webContents.send('remove-menu')
-        }) */
     }
 }

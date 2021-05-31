@@ -40,44 +40,40 @@ function detectIfWinIsMaximized() {
     }
 }
 
-function updateCodeLineBarNum() {
-    let divList = byID('text-area').querySelectorAll('div')
+function detectNewAlert() {
+    if (newAlertList.length > 0 && alertTimeout === undefined) {
+        alertTimeout = setTimeout(cancelAlert, 5e3)
 
-    if (byID('text-area').innerHTML != lastInnerHTMLTextArea) {
-        lastInnerHTMLTextArea = byID('text-area').innerHTML
+        showAlert(newAlertList[0]['text'], newAlertList[0]['color'])
 
-        linesCount = 0
-        byID('code-line-bar').innerHTML = ''
-
-        if (divList.length == 0) createLine()
-
-        Array.prototype.forEach.call(divList, (e) => {
-            createLine(e)
-        })
+        newAlertList.splice(0, 1)
     }
 }
 
-function liColTextArea(forceLaunch) {
-    if ($('#text-area').is(":focus")) {
-        let textAreaRange = window.getSelection().getRangeAt(0)
+track(qSelect('#tracked'), {
+    callback(selection) {
+        let characters = selection.toString().split(''),
+            currentFile = file[currentFileNum.toString()]
 
-        if (textAreaRange != lastTextAreaRange || forceLaunch === true) {
-            let startSelectionDiv = textAreaRange.startContainer,
-                li = 1,
-                col = textAreaRange.startOffset + 1
+        currentFile['selection']['type'] = selection.type
+        currentFile['selection']['length'] = characters.length
 
-            lastTextAreaRange = textAreaRange
+        byID('select-count').textContent = characters.length
 
-            while (isNaN(startSelectionDiv.offsetTop)) {
-                startSelectionDiv = startSelectionDiv.parentNode
-            }
-
-            li = (startSelectionDiv.offsetTop / textAreaLineHeight) + 1
-
-            byID('code-line-li').textContent = `Li ${li},`
-            if (textAreaRange.startOffset !== undefined) byID('code-line-col').textContent = `col ${col}`
-
-            setActiveCurrentLine(li)
+        if (selection.type == 'Range') {
+            byID('li-num').style.display = 'none'
+            byID('col-num').style.display = 'none'
+            byID('selection').style.display = 'flex'
+        } else {
+            byID('li-num').style.display = ''
+            byID('col-num').style.display = ''
+            byID('selection').style.display = ''
         }
-    }
-}
+    },
+    trackDynamically: true,
+    trackMouse: true,
+    trackPointer: true,
+    trackKeyBoard: true,
+    trackTouch: true,
+    subscribeToDocument: true
+})

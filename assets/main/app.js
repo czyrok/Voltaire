@@ -1,8 +1,10 @@
 const { app, ipcMain, shell, session, BrowserWindow } = require('electron'),
+    electronContextMenu = require('electron-context-menu'),
 
     globalProcess = require('./process/global.js'),
     fileProcess = require('./process/file.js'),
     windowProcess = require('./process/window.js'),
+    contextMenuProcess = require('./process/menu/context.js'),
 
     gotTheLock = app.requestSingleInstanceLock(),
     thisUpdate = `${app.getName()} Update Setup ${app.getVersion()}.exe`
@@ -16,7 +18,7 @@ function quit() {
         fileProcess.saveFiles()
 
         function exit() {
-            if (globalProcess.savedFilesCount == 3) {
+            if (globalProcess.savedFilesCount == globalProcess.filesSavedCount) {
                 clearInterval(globalProcess.updateInterval)
 
                 app.quit()
@@ -31,7 +33,7 @@ function launchUpdate() {
     fileProcess.saveFiles()
 
     async function exit() {
-        if (globalProcess.savedFilesCount == 3) {
+        if (globalProcess.savedFilesCount == globalProcess.filesSavedCount) {
             clearInterval(globalProcess.updateInterval)
 
             await shell.openPath(globalProcess.updatePath)
@@ -107,7 +109,7 @@ if (!gotTheLock) {
 
                         globalProcess.updatePercent = percent
 
-                        BrowserWindow.getAllWindows().forEach(window => window.webContents.send('update', globalProcess.updatePercent))
+                        BrowserWindow.getAllWindows().forEach(win => win.webContents.send('update', globalProcess.updatePercent))
                     }
                 })
 
@@ -122,7 +124,7 @@ if (!gotTheLock) {
                 if (thisUpdate == item.getFilename()) {
                     item.cancel()
                 } else {
-                    BrowserWindow.getAllWindows().forEach(window => window.webContents.send('update', globalProcess.updatePercent))
+                    BrowserWindow.getAllWindows().forEach(win => win.webContents.send('update', globalProcess.updatePercent))
                 }
             } else {
                 globalProcess.updateDownloadIsActive = 0
@@ -131,13 +133,11 @@ if (!gotTheLock) {
     })
 
     app.on('window-all-closed', () => {
-        if (!globalProcess.darwin) {
-            quit()
-        }
+        quit()
     })
 
     app.on('activate', () => {
-        activating()
+        globalProcess.currentWindow.focus()
     })
 
     app.on('browser-window-focus', (e, window) => {
@@ -150,7 +150,7 @@ module.exports.activating = (url) => {
 }
 
 module.exports.quit = () => {
-    BrowserWindow.getAllWindows().forEach((window) => window.close())
+    BrowserWindow.getAllWindows().forEach(win => win.close())
 }
 
 module.exports.showMenu = () => {
@@ -164,15 +164,20 @@ module.exports.showSettings = () => {
 ipcMain.on('reset-parameter-file', () => {
     globalProcess.parameterFile = JSON.parse(globalProcess.defaultParameterFile)
 
-    BrowserWindow.getAllWindows().forEach(window => window.webContents.send('parameter-file', globalProcess.parameterFile))
+    BrowserWindow.getAllWindows().forEach(win => win.webContents.send('parameter-file', globalProcess.parameterFile))
 })
 
 ipcMain.on('new-parameter-file', (e, file) => {
-    if (globalProcess.parameterFile['lang'] != file['lang']) globalProcess.buildMenu(file['lang'])
+    if (globalProcess.parameterFile['lang'] != file['lang']) globalProcess.buildWindowMenu(file['lang'])
 
     globalProcess.parameterFile = file
 
-    BrowserWindow.getAllWindows().forEach(window => window.webContents.send('parameter-file', globalProcess.parameterFile))
+    delete electronContextMenu()
+
+    BrowserWindow.getAllWindows().forEach((win) => {
+        electronContextMenu(contextMenuProcess.template(globalProcess.parameterFile['lang'], win))
+        win.webContents.send('parameter-file', globalProcess.parameterFile)
+    })
 })
 
 ipcMain.on('new-window-file', (e, file) => {

@@ -2,30 +2,30 @@ const { app } = require('electron'),
 
     appProcess = require('../../app.js'),
     globalProcess = require('../global.js'),
-    langProcess = require('../lang.js')
+    langConfig = require('../../../config/lang-config.json')
 
 module.exports.template = function (language) {
     let template = [
         {
-            label: globalProcess.darwin ? app.getName() : langProcess.lang[language]['menu']['app']['title'],
+            label: globalProcess.darwin ? app.getName() : langConfig[language]['menu']['app']['title'],
             submenu: [
                 {
-                    label: langProcess.lang[language]['menu']['app']['new-window'],
-                    accelerator: 'CommandOrControl+Shift+N',
+                    label: langConfig[language]['menu']['app']['new-window'],
+                    accelerator: 'CommandOrControl+N',
                     click() {
                         appProcess.activating()
                     }
                 },
                 { type: 'separator' },
                 {
-                    label: langProcess.lang[language]['menu']['app']['recent-files'],
+                    label: langConfig[language]['menu']['app']['recent-files'],
                     accelerator: 'CommandOrControl+R',
                     click() {
                         appProcess.showMenu()
                     }
                 },
                 {
-                    label: langProcess.lang[language]['menu']['app']['settings'],
+                    label: langConfig[language]['menu']['app']['settings'],
                     accelerator: 'CommandOrControl+,',
                     click() {
                         appProcess.showSettings()
@@ -33,7 +33,7 @@ module.exports.template = function (language) {
                 },
                 { type: 'separator' },
                 {
-                    label: langProcess.lang[language]['menu']['app']['exit'],
+                    label: langConfig[language]['menu']['app']['exit'],
                     accelerator: 'CommandOrControl+W',
                     click() {
                         appProcess.quit()
@@ -42,37 +42,37 @@ module.exports.template = function (language) {
             ]
         },
         {
-            label: langProcess.lang[language]['menu']['edit']['title'],
+            label: langConfig[language]['menu']['edit']['title'],
             submenu: [
                 {
-                    label: langProcess.lang[language]['menu']['edit']['undo'],
+                    label: langConfig[language]['menu']['edit']['undo'],
                     accelerator: 'CommandOrControl+Z',
                     role: 'undo'
                 },
                 {
-                    label: langProcess.lang[language]['menu']['edit']['redo'],
+                    label: langConfig[language]['menu']['edit']['redo'],
                     accelerator: 'CommandOrControl+Y',
                     role: 'redo'
                 },
                 { type: 'separator' },
                 {
-                    label: langProcess.lang[language]['menu']['edit']['select'],
+                    label: langConfig[language]['menu']['edit']['select'],
                     accelerator: 'CommandOrControl+A',
                     role: 'selectAll'
                 },
                 { type: 'separator' },
                 {
-                    label: langProcess.lang[language]['menu']['edit']['cut'],
+                    label: langConfig[language]['menu']['edit']['cut'],
                     accelerator: 'CommandOrControl+X',
                     role: 'cut'
                 },
                 {
-                    label: langProcess.lang[language]['menu']['edit']['copy'],
+                    label: langConfig[language]['menu']['edit']['copy'],
                     accelerator: 'CommandOrControl+C',
                     role: 'copy'
                 },
                 {
-                    label: langProcess.lang[language]['menu']['edit']['paste'],
+                    label: langConfig[language]['menu']['edit']['paste'],
                     accelerator: 'CommandOrControl+V',
                     role: 'paste'
                 }

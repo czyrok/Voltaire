@@ -1,0 +1,49 @@
+<style>
+    #message-bar {
+        width: 100%;
+        height: <%= messageBar.height %>px;
+        background-color: <%= global.colors.c %>;
+        display: grid;
+        font-family: <%= global.fonts.b %>;
+        grid-template-areas: "a b c";
+        grid-auto-columns: 33.3%;
+        position: absolute;
+        bottom: 0;
+    }
+
+    #message-bar #li-col-selection {
+        display: flex;
+        opacity: 1;
+        overflow: hidden;
+    }
+
+    @keyframes showLiColSelect {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @keyframes removeLiColSelect {
+        0% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0;
+        }
+    }
+
+    #message-bar #li-col-selection p {
+        font-size: 12px;
+        margin: 2px;
+        white-space: nowrap;
+    }
+
+    #message-bar #li-col-selection #selection {
+        display: none;
+    }
+</style>

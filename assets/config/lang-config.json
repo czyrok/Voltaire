@@ -1,0 +1,98 @@
+{
+    "en": {
+        "interface": {
+            "menu": {
+                "recent-files": "recent-files.display",
+                "settings": "settings.display"
+            },
+            "alert": {
+                "reset-settings": "The settings have been reset"
+            },
+            "update": "Update",
+            "message-bar": {
+                "selection": "element(s)"
+            }
+        },
+        "settings": {
+            "lang": {
+                "title": "Default language"
+            },
+            "settings": {
+                "title": "Settings",
+                "reset": "Reset settings"
+            }
+        },
+        "menu": {
+            "app": {
+                "title": "App",
+                "new-window": "New window",
+                "recent-files": "Recent Files",
+                "settings": "Open settings",
+                "exit": "Exit"
+            },
+            "file": {
+                "title": "File",
+                "new-file": "New file",
+                "open-file": "Open",
+                "open-file-window": "Open in a window"
+            },
+            "edit": {
+                "title": "Edit",
+                "undo": "Undo",
+                "redo": "Redo",
+                "select": "Select All",
+                "cut": "Cut",
+                "copy": "Copy",
+                "paste": "Paste"
+            }
+        }
+    },
+    "fr": {
+        "interface": {
+            "menu": {
+                "recent-files": "fichiers-récents.display",
+                "settings": "paramètres.display"
+            },
+            "alert": {
+                "reset-settings": "Les paramètres ont été réinitialisés"
+            },
+            "update": "Mise à jour",
+            "message-bar": {
+                "selection": "élement(s)"
+            }
+        },
+        "settings": {
+            "lang": {
+                "title": "Langue par défaut"
+            },
+            "settings": {
+                "title": "Paramètres",
+                "reset": "Réinitialiser les paramètres"
+            }
+        },
+        "menu": {
+            "app": {
+                "title": "App",
+                "new-window": "Nouvelle fenêtre",
+                "recent-files": "Fichiers récents",
+                "settings": "Ouvrir les paramètres",
+                "exit": "Quitter"
+            },
+            "file": {
+                "title": "Fichier",
+                "new-file": "Nouveau fichier",
+                "open-file": "Ouvrir",
+                "open-file-window": "Ouvrir dans une fenêtre"
+            },
+            "edit": {
+                "title": "Edition",
+                "undo": "Annuler",
+                "redo": "Rétablir",
+                "select": "Tout sélectionner",
+                "cut": "Couper",
+                "copy": "Copier",
+                "paste": "Coller"
+            }
+        }
+    }
+}

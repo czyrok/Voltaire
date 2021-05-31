@@ -1,216 +1,52 @@
-@import "global.less";
+@import "./less-config.less";
 
-#settings {
-    width: 0;
-    height: 0;
-    z-index: @settingsZIndex;
-    overflow: hidden;
-    opacity: 0;
-    font-size: 0;
-    display: inline-flex;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    position: absolute;
+#settings-page #centered-area {
+    width: fit-content;
+    margin-left: 50%;
+    transform: translate(-50%, 0);
 }
 
-@keyframes removeSettings {
-    0% {
-        width: @settingsWidth;
-        height: @settingsHeight;
-        opacity: 1;
-        font-size: 100%;
-    }
-
-    40% {
-        width: @settingsWidth + 25px;
-        height: @settingsHeight + 25px;
-        font-size: 110%;
-    }
-
-    70% {
-        width: @settingsWidth;
-        height: @settingsHeight;
-        opacity: .8;
-        font-size: 100%;
-    }
-
-    100% {
-        width: 0;
-        height: 0;
-        opacity: 0;
-        font-size: 0;
-    }
-}
-
-@keyframes showSettings {
-    0% {
-        width: 0;
-        height: 0;
-        opacity: 0;
-        font-size: 0;
-    }
-
-    30% {
-        width: @settingsWidth;
-        height: @settingsHeight;
-        opacity: .8;
-        font-size: 100%;
-    }
-
-    60% {
-        width: @settingsWidth + 10px;
-        height: @settingsHeight + 10px;
-        font-size: 104%;
-    }
-
-    100% {
-        width: @settingsWidth;
-        height: @settingsHeight;
-        opacity: 1;
-        font-size: 100%;
-    }
-}
-
-/*--------------*/
-
-#settings #categories {
-    width: calc(@categoriesWidth - (@settingsMarginPadding * 2));
-    height: calc(100% - (@settingsMarginPadding * 2));
-    background-color: @color2;
-    border-bottom-left-radius: @globalRadius;
-    border-top-left-radius: @globalRadius;
-    padding: @settingsMarginPadding;
-    overflow: hidden;
-}
-
-/*--------------*/
-
-#settings .category {
-    cursor: pointer;
-}
-
-#settings .category input {
-    display: none;
-}
-
-#settings .category .checkmark {
-    padding: @settingsMarginPadding;
-}
-
-#settings .category input:checked~.checkmark {
-    background-color: @color1;
-    border-radius: @categoriesZIndexRadius;
-}
-
-#settings .category .checkmark p {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    text-align: center;
-    font-size: 100%;
-}
-
-/*--------------*/
-
-#settings .content {
-    width: calc(@contentWidth - (@settingsMarginPadding * 2));
-    height: calc(100% - (@settingsMarginPadding * 2));
-    right: 0;
-    padding: @settingsMarginPadding;
-    overflow: hidden;
-    background-color: @color3;
-    border-bottom-right-radius: @globalRadius;
-    border-top-right-radius: @globalRadius;
-    display: none;
-}
-
-#settings .content[active=true] {
-    display: block;
-}
-
-#settings .content .close-settings {
+#settings-page h1 {
     font-size: 1.15em;
-    position: absolute;
-    right: @settingsMarginPadding;
-    color: @color4;
+    margin: 0.5em;
 }
 
-#settings .content .close-settings:hover {
-    color: @color5;
+#settings-page .offset-area {
+    margin-left: 1.5em;
 }
 
-#settings .content h1 {
-    font-size: 1.15em;
-    text-align: center;
-    margin-bottom: .3em;
-}
-
-#settings .content p {
-    display: inline-flex;
+#settings-page p {
+    display: inline;
     font-size: 1.04em;
-    color: @color5
 }
 
-#settings .content button {
+#settings-page button {
     font-size: 1.15em;
-    color: @color4;
+    color: @color3;
 }
 
-#settings .content button:hover {
+#settings-page button:hover {
     color: @color5;
 }
 
-/*--------------*/
-
-#settings .content#lang-category-content p {
-    position: absolute;
-    cursor: pointer;
+#settings-page #reset-settings-button {
+    font-size: 1.05em;
+    width: 1.2em;
+    height: 1.2em;
 }
 
-#settings .select-lang {
-    cursor: pointer;
-    position: relative;
-    display: inline-flex;
-    margin-right: .2em;
-}
-
-#settings .select-lang input {
-    display: none;
-}
-
-#settings .select-lang .checkmark {
-    height: 1em;
-    width: 1em;
-    background-color: @color2;
-    border-radius: 50%;
-    font-size: 1.5em;
-}
-
-#settings .select-lang .checkmark:after {
-    content: "";
-    position: absolute;
-    opacity: 0;
-    top: 50%;
-    left: 50%;
-    width: 1em;
-    height: 1em;
-    border-radius: 50%;
-    background-color: @color1;
-    font-size: .32em;
-    transform: translate(-50%, -50%);
-}
-
-#settings .select-lang input:checked~.checkmark:after {
-    opacity: 1;
-}
-
-/*--------------*/
-
-#settings .content #reset-settings-button-spin {
+#settings-page #reset-settings-button-spin {
     cursor: default;
     animation: spinResetButton 1s ease;
     color: @color5;
+    font-size: 1.05em;
+    width: 1.2em;
+    height: 1.2em;
+}
+
+#settings-page #reset-settings-button span,
+#settings-page #reset-settings-button-spin span {
+    display: none;
 }
 
 @keyframes spinResetButton {
@@ -221,4 +57,11 @@
     100% {
         transform: rotate(360deg)
     }
+}
+
+#settings-page .drop-menu-select {
+    background-color: @color2;
+    color: @color5;
+    font-size: 1em;
+    padding: @globalEmMarginPadding;
 }

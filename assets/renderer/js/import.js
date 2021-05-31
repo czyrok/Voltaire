@@ -1,29 +1,89 @@
-let currentDate = new Date(),
-	importLinks = document.querySelectorAll('link[rel="import"]'),
-	importedFilesCount = 0
-
-if (importLinks.length <= 0) {
+if (HTMLImportLinks.length <= 0) {
 	console.log('[No HTML file loaded]')
 } else {
-	Array.prototype.forEach.call(importLinks, (e) => {
-		fetch(e.getAttribute('href'))
-			.then((response) => {
-				return response.text()
-			})
-			.then((element) => {
-				qSelect('body').innerHTML = qSelect('body').innerHTML + element
+	let currentDate = new Date()
 
-				importedFilesCount++
+	HTMLImportLinks.forEach((e) => {
+		ejs.renderFile(`${__dirname}/${e.getAttribute('href')}`, function (error, data) {
+			if (error) console.error(error)
 
-				if (importedFilesCount == importLinks.length) {
-					if (importedFilesCount == 1) {
-						console.log(`[${importedFilesCount} HTML file loaded in ${new Date() - currentDate}ms]`)
-					} else {
-						console.log(`[${importedFilesCount} HTML files loaded in ${new Date() - currentDate}ms]`)
-					}
+			qSelect('body').innerHTML = qSelect('body').innerHTML + data
 
-					importHaveFinished = 1
+			HTMLImportedFilesCount++
+
+			if (HTMLImportedFilesCount == HTMLImportLinks.length) {
+				if (HTMLImportedFilesCount == 1) {
+					console.log(`[${HTMLImportedFilesCount} HTML file loaded in ${new Date() - currentDate}ms]`)
+				} else {
+					console.log(`[${HTMLImportedFilesCount} HTML files loaded in ${new Date() - currentDate}ms]`)
 				}
-			})
+
+				HTMLImportHaveFinished = 1
+			}
+		})
+
+		/* 		fs.readFile(`${__dirname}/${e.getAttribute('href')}`, (error, data) => {
+					if (error) console.error(error)
+		
+					qSelect('body').innerHTML = qSelect('body').innerHTML + data
+		
+					HTMLImportedFilesCount++
+		
+					if (HTMLImportedFilesCount == HTMLImportLinks.length) {
+						if (HTMLImportedFilesCount == 1) {
+							console.log(`[${HTMLImportedFilesCount} HTML file loaded in ${new Date() - currentDate}ms]`)
+						} else {
+							console.log(`[${HTMLImportedFilesCount} HTML files loaded in ${new Date() - currentDate}ms]`)
+						}
+		
+						HTMLImportHaveFinished = 1
+					}
+				})
+		
+				fetch(e.getAttribute('href'))
+					.then((response) => {
+						return response.text()
+					})
+					.then((data) => {
+						qSelect('body').innerHTML = qSelect('body').innerHTML + data
+		
+						HTMLImportedFilesCount++
+		
+						if (HTMLImportedFilesCount == HTMLImportLinks.length) {
+							if (HTMLImportedFilesCount == 1) {
+								console.log(`[${HTMLImportedFilesCount} HTML file loaded in ${new Date() - currentDate}ms]`)
+							} else {
+								console.log(`[${HTMLImportedFilesCount} HTML files loaded in ${new Date() - currentDate}ms]`)
+							}
+		
+							HTMLImportHaveFinished = 1
+						}
+					}) */
+	})
+}
+
+if (CSSImportLinks.length <= 0) {
+	console.log('[No CSS file loaded]')
+} else {
+	let currentDate = new Date()
+
+	CSSImportLinks.forEach((e) => {
+		const localsName = cssConfig
+
+		ejs.renderFile(`${__dirname}/${e.getAttribute('href')}`, localsName, function (error, data) {
+			if (error) console.error(error)
+
+			qSelect('body').innerHTML = qSelect('body').innerHTML + data
+
+			CSSImportedFilesCount++
+
+			if (CSSImportedFilesCount == CSSImportLinks.length) {
+				if (CSSImportedFilesCount == 1) {
+					console.log(`[${CSSImportedFilesCount} CSS file loaded in ${new Date() - currentDate}ms]`)
+				} else {
+					console.log(`[${CSSImportedFilesCount} CSS files loaded in ${new Date() - currentDate}ms]`)
+				}
+			}
+		})
 	})
 }
