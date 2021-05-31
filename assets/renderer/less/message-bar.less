@@ -1,22 +1,49 @@
-@import "global.less";
+@import "./less-config.less";
 
 #message-bar {
     width: 100%;
     height: @messageBarSize;
     background-color: @color3;
-    bottom: 0;
-    position: absolute;
     display: grid;
     font-family: @font2;
     grid-template-areas: "a b c";
     grid-auto-columns: 33.3%;
+    position: absolute;
+    bottom: 0;
 }
 
-#message-bar #li-col {
-    display: inline-flex;
+#message-bar #li-col-selection {
+    display: flex;
+    opacity: 1;
+    overflow: hidden;
 }
 
-#message-bar #li-col p {
+@keyframes showLiColSelect {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes removeLiColSelect {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+#message-bar #li-col-selection p {
     font-size: 12px;
     margin: 2px;
+    white-space: nowrap;
+}
+
+#message-bar #li-col-selection #selection {
+    display: none;
 }

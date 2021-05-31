@@ -22,63 +22,84 @@ function pinWin() {
     }
 }
 
-byID('settings.lady')
-
 function applyChangeLang(language) {
-    if (appLang != language) {
-        if (appLang !== undefined) delete electronContextMenu()
-        electronContextMenu(contextMenuProcess.template(language))
+    if (language === undefined) language = byID('select-lang').value
 
-        byID('interface.menu.title').textContent = langProcess.lang[language]['interface']['menu']['title']
+    if (language != appLang) {
+        byID('interface.menu.recent-files').textContent = langConfig[language]['interface']['menu']['recent-files']
+        byID('interface.menu.settings').textContent = langConfig[language]['interface']['menu']['settings']
 
-        byID('settings.lang.category').textContent = langProcess.lang[language]['settings']['lang']['category']
-        byID('settings.lang.title').textContent = langProcess.lang[language]['settings']['lang']['title']
+        byID('settings.lang.title').textContent = langConfig[language]['settings']['lang']['title']
 
-        byID('settings.settings.category').textContent = langProcess.lang[language]['settings']['settings']['category']
-        byID('settings.settings.title').textContent = langProcess.lang[language]['settings']['settings']['title']
-        byID('settings.settings.reset').textContent = langProcess.lang[language]['settings']['settings']['reset']
+        byID('settings.settings.title').textContent = langConfig[language]['settings']['settings']['title']
+        byID('settings.settings.reset').textContent = langConfig[language]['settings']['settings']['reset']
 
-        byID('interface.update').textContent = langProcess.lang[language]['interface']['update']
+        byID('interface.update').textContent = langConfig[language]['interface']['update']
 
-        byID(language).checked = true
+        byID('interface.message-bar.selection').textContent = langConfig[language]['interface']['message-bar']['selection']
+
+        byID(language).selected = true
 
         appLang = language
     }
 }
 
-function showRemoveMenu() {
+function showMenu(showSettings) {
     if (menuIsShowed == 0) {
+        if (showSettings === true) {
+            setMenuActiveTab('settings')
+        } else {
+            setMenuActiveTab(defaultMenu)
+        }
+
         byID('menu').style.animation = 'showMenu 0.5s ease forwards'
+
         byID('main').style.animation = 'removeMain 0.5s ease forwards'
+        byID('li-col-selection').style.animation = 'removeLiColSelect 0.5s ease forwards'
+
+        byID('main-background').style.display = 'block'
+        byID('main-background').style.animation = 'showMainBackground 0.5s ease forwards'
 
         menuIsShowed = 1
+    } else if (showSettings === true) {
+        setMenuActiveTab('settings')
     } else {
+        setMenuActiveTab(defaultMenu)
+    }
+}
+
+function removeMenu() {
+    if (menuIsShowed == 1) {
         byID('menu').style.animation = 'removeMenu 0.5s ease forwards'
+
         byID('main').style.animation = 'showMain 0.5s ease forwards'
+        byID('li-col-selection').style.animation = 'showLiColSelect 0.5s ease forwards'
+
+        byID('main-background').style.animation = 'removeMainBackground 0.5s ease forwards'
+        setTimeout(() => {
+            byID('main-background').style.display = 'none'
+        }, 500)
 
         menuIsShowed = 0
     }
 }
 
-function showSettings() {
-    if (canSendParameterFile == 1) {
-        if (settingsAreShowed == 0) {
-            setActiveSettingsCategoryContent('lang-category-content')
+function showAlert(text, color) {
+    if (alertAreShowed == 0) {
+        byID('alert-text').textContent = text
 
-            byID('default').checked = true
+        byID('alert').style.animation = 'showAlert 0.5s ease forwards'
+        byID('alert').setAttribute('color', color)
 
-            byID('settings').style.animation = 'showSettings 0.5s ease forwards'
-
-            settingsAreShowed = 1
-        }
+        alertAreShowed = 1
     }
 }
 
-function removeSettings() {
-    if (settingsAreShowed == 1) {
-        byID('settings').style.animation = 'removeSettings 0.3s ease forwards'
+function removeAlert() {
+    if (alertAreShowed == 1) {
+        byID('alert').style.animation = 'removeAlert 0.3s ease forwards'
 
-        settingsAreShowed = 0
+        alertAreShowed = 0
     }
 }
 
@@ -94,55 +115,129 @@ function showRemoveUpdate() {
     }
 }
 
-function setActiveTab(id) {
-    if (currentActiveTab !== undefined) {
-        byID(currentActiveTab).removeAttribute('active')
+function setActiveTab(num) {
+    if (currentFileNum !== undefined) {
+        byID(`tab-${currentFileNum}`).removeAttribute('active')
+        byID(`file-${currentFileNum}`).removeAttribute('active')
     }
 
-    byID(id).setAttribute('active', 'true')
+    file[currentFileNum.toString()]['global']['ready'] = 0
 
-    currentActiveTab = id
-}
+    byID(`tab-${num}`).setAttribute('active', 'true')
+    byID(`tab-${num}-input`).checked = true
 
-function setActiveSettingsCategoryContent(id) {
-    if (currentSettingsCategoryContent !== undefined) {
-        byID(currentSettingsCategoryContent).removeAttribute('active')
+    byID(`file-${num}`).setAttribute('active', 'true')
+    byID(`file-${num}`).focus()
+
+    currentFileNum = num
+
+    let currentFile = file[currentFileNum.toString()]
+
+    //updateCodeLinesAndSelection(true)
+
+    if (currentFile['selection']['focusNode'] !== undefined) {
+        window.getSelection().setBaseAndExtent(
+            currentFile['selection']['focusNode'],
+            currentFile['selection']['focusOffset'],
+            currentFile['selection']['anchorNode'],
+            currentFile['selection']['anchorOffset']
+        )
     }
 
-    byID(id).setAttribute('active', 'true')
+    $(`#file-${currentFileNum}`).scrollTop(currentFile['scroll']['top'])
+    $(`#file-${currentFileNum}`).scrollLeft(currentFile['scroll']['left'])
 
-    currentSettingsCategoryContent = id
+    byID('select-count').textContent = currentFile['selection']['length']
+
+    currentFile['global']['ready'] = 1
 }
 
-function createLine(e) {
-    if (e && e.offsetTop == lastLineTop && linesCount >= 1) return
+function setMenuActiveTab(name) {
+    byID(`${currentMenu}-tab`).removeAttribute('active')
+    byID(`${currentMenu}-page`).removeAttribute('active')
 
-    linesCount++
+    byID(`${name}-tab`).setAttribute('active', 'true')
+    byID(`${name}-tab-input`).checked = true
 
-    let div = document.createElement('div')
-    div.setAttribute('id', linesCount)
-    div.textContent = linesCount
-    byID('code-line-bar').appendChild(div)
+    byID(`${name}-page`).setAttribute('active', 'true')
 
-    $('#code-line-bar').scrollTop(lastScrollTop)
+    currentMenu = name
+}
 
-    if (e) {
-        lastLineTop = e.offsetTop
+function setActiveLine(line) {
+    if (byID(line.toString())) {
+        byID(line.toString()).setAttribute('active', 'true')
 
-        liColTextArea(true)
+        lastCurrentLinesSet.push(line)
+    }
+}
+
+function unsetLastActiveLines() {
+    if (lastCurrentLinesSet.length > 0) {
+        while (lastCurrentLinesSet.length > 0) {
+            if (byID(`${lastCurrentLinesSet[0]}`)) byID(`${lastCurrentLinesSet[0]}`).removeAttribute('active')
+
+            lastCurrentLinesSet.splice(0, 1)
+        }
+    }
+}
+
+function updateCodeLinesAndSelection(forcedLaunch) {
+    if (forcedLaunch === true) updateElementsList()
+
+    let currentFile = file[currentFileNum.toString()],
+        linesCount = 1
+
+    byID('main-code-line-bar').innerHTML = ''
+
+    if (currentFile['global']['elements'].length == 0) {
+        let div = document.createElement('div')
+        div.setAttribute('id', linesCount)
+        div.textContent = linesCount
+
+        byID('main-code-line-bar').appendChild(div)
+
+        linesCount++
     } else {
-        lastLineTop = 0
+        currentFile['global']['elements'].forEach((element) => {
+            let div = document.createElement('div')
+            div.setAttribute('id', linesCount)
+            div.setAttribute('style', `height: ${$(element).height()}px`)
+            div.textContent = linesCount
 
-        byID(`${linesCount}`).setAttribute('active', 'true')
+            byID('main-code-line-bar').appendChild(div)
+
+            linesCount++
+        })
     }
+
+    unsetLastActiveLines()
+
+    if (currentFile['selection']['type'] == 'Range') {
+        setActiveLine(currentFile['global']['li'])
+        setActiveLine(currentFile['global']['end'])
+
+        byID('li-num').style.display = 'none'
+        byID('col-num').style.display = 'none'
+        byID('selection').style.display = 'flex'
+    } else {
+        setActiveLine(currentFile['global']['li'])
+
+        byID('li-num').style.display = ''
+        byID('col-num').style.display = ''
+        byID('selection').style.display = ''
+    }
+
+    $('#main-code-line-bar').scrollTop(currentFile['scroll']['top'])
 }
 
-function setActiveCurrentLine(line) {
-    if (byID(`${line}`)) {
-        if (lastCurrentLine !== undefined && byID(`${lastCurrentLine}`)) byID(`${lastCurrentLine}`).removeAttribute('active')
+function changeScroll() {
+    let top = $(`#file-${currentFileNum}`).scrollTop(),
+        left = $(`#file-${currentFileNum}`).scrollLeft()
 
-        byID(`${line}`).setAttribute('active', 'true')
+    $('#main-code-line-bar').scrollTop(top)
+    $('#copie').scrollTop(top)
 
-        lastCurrentLine = line
-    }
+    file[currentFileNum.toString()]['scroll']['top'] = top
+    file[currentFileNum.toString()]['scroll']['left'] = left
 }

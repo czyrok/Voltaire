@@ -2,34 +2,36 @@ window.$ = window.jQuery = require('jquery')
 
 const { ipcRenderer, shell } = require('electron'),
     fs = require('fs'),
-    electronContextMenu = require('electron-context-menu'),
+    ejs = require('ejs'),
+    { track, select, selectOnly, removeAllSelection, getSelectionInsideNode } = require('selection-range-enhancer'),
+    caret = require('jquery.caret'),
+    hljs = require('highlight.js'),
     dragula = require('dragula'),
-    langProcess = require('../../process/lang.js'),
-    contextMenuProcess = require('../../process/menu/context.js'),
+    prism = require('prismjs')
 
+    darwin = process.platform === 'darwin',
     win = require('electron').remote.getCurrentWindow(),
-
     app = require('electron').remote.app,
     appVersion = app.getVersion(),
     appName = app.getName(),
-    appAuthor = 'czyrok'
+
+    langConfig = require('../../config/lang-config.json')
 
 let // global settings
     updateDownloadIsActive = 0,
-    importHaveFinished = 0,
+    HTMLImportHaveFinished = 0,
     paste = 0,
     setupInterval,
+    appLang,
+    defaultLanguage = 'en',
 
-    // updateCodeLineBarNum()
-    linesCount = 0,
-    lastLineTop = 0,
-    lastInnerHTMLTextArea,
-    lastScrollTop,
+    file = {},
 
-    // liColTextArea()
-    lastCurrentLine,
-    lastTextAreaRange,
-    textAreaLineHeight = 22, // px
+    // code lines bar settings
+    lastCurrentLinesSet = [],
+
+    // content editable settings
+    textInContentEditable = 0,
 
     // parameter file
     parameterFile,
@@ -49,16 +51,29 @@ let // global settings
     // window settings
     winIsMaximized = 0,
     winAlwaysOnTop = 0,
-    appLang,
 
     // dialog settings
     menuIsShowed = 0,
-    settingsAreShowed = 0,
+    alertAreShowed = 0,
     updateIsShowed = 0,
 
     // tab settings
-    currentActiveTab,
-    currentSettingsCategoryContent
+    currentFileNum = 1,
+
+    // menu settings
+    defaultMenu = 'recent-files',
+    currentMenu = defaultMenu,
+
+    // alert settings
+    newAlertList = [],
+    alertTimeout,
+
+    // import settings
+    HTMLImportLinks = qSelectAll('link[rel="import/html"]'),
+	HTMLImportedFilesCount = 0,
+
+	CSSImportLinks = qSelectAll('link[rel="import/css"]'),
+	CSSImportedFilesCount = 0
 
 console.log(`[${appName}/${appVersion}]`)
 
@@ -68,6 +83,10 @@ function byID(id) {
 
 function qSelect(selector) {
     return document.querySelector(selector)
+}
+
+function qSelectAll(selector) {
+    return document.querySelectorAll(selector)
 }
 
 /* const cp = require('child_process')

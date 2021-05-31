@@ -1,0 +1,64 @@
+// global fonts
+@font-face {
+  font-family: "notosans-regular";
+  src: url("../fonts/notosans/notosans-regular.ttf");
+}
+
+@font1: "notosans-regular";
+
+@font-face {
+  font-family: "firecode-regular";
+  src: url("../fonts/firecode/firecode-regular.ttf");
+}
+
+@font2: "firecode-regular";
+
+// global colors
+@color1: #1e1e1e;
+@color2: #303030;
+@color3: #7A7A7A;
+@color4: #D4D4D4;
+@color5: #f5f5f5;
+
+// interface positioning
+@alertZIndex: 200;
+
+@tabAreaZIndex: 100;
+@mainFontZIndex: 101;
+@mainBackgroundZIndex: 102;
+
+// global settings
+@globalMarginPadding: 5px;
+@globalEmMarginPadding: .3em;
+@globalRadius: 8px;
+@minWidth: 450px;
+@minHeight: 450px - 79px;
+
+// global scroll bar
+@scrollBarSize: 8px;
+@scrollBarRadius: 3px;
+
+// top bar (with tabs)
+@topBarHeight: 35px;
+@topBarLeft: 55px;
+
+// bottom area settings (with text area, code line bar)
+@codeLineWidth: 50px;
+@bottomPaddingArea: 0px;
+
+// message bar settings
+@messageBarSize: 20px;
+
+// tab settings
+@buttonTabSize: 20px;
+@tabWidth: 150px;
+@tabHeight: 30px;
+@pTabWidth: @tabWidth - @buttonTabSize - (4 * @globalMarginPadding);
+@afterBeforeTabTop: (@topBarHeight - @tabHeight);
+
+// menu settings
+@menuWidth: 400px;
+
+// alert settings
+@alertTop: @topBarHeight + 15px;
+@alertHeight: 60px;

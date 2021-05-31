@@ -1,0 +1,67 @@
+<style>
+    #settings-page #centered-area {
+        width: fit-content;
+        margin-left: 50%;
+        transform: translate(-50%, 0);
+    }
+
+    #settings-page h1 {
+        font-size: 1.15em;
+        margin: 0.5em;
+    }
+
+    #settings-page .offset-area {
+        margin-left: 1.5em;
+    }
+
+    #settings-page p {
+        display: inline;
+        font-size: 1.04em;
+    }
+
+    #settings-page button {
+        font-size: 1.15em;
+        color: <%=global.colors.c %>;
+    }
+
+    #settings-page button:hover {
+        color: <%=global.colors.e %>;
+    }
+
+    #settings-page #reset-settings-button {
+        font-size: 1.05em;
+        width: 1.2em;
+        height: 1.2em;
+    }
+
+    #settings-page #reset-settings-button-spin {
+        cursor: default;
+        animation: spinResetButton 1s ease;
+        color: <%=global.colors.e %>;
+        font-size: 1.05em;
+        width: 1.2em;
+        height: 1.2em;
+    }
+
+    #settings-page #reset-settings-button span,
+    #settings-page #reset-settings-button-spin span {
+        display: none;
+    }
+
+    @keyframes spinResetButton {
+        0% {
+            transform: rotate(0deg)
+        }
+
+        100% {
+            transform: rotate(360deg)
+        }
+    }
+
+    #settings-page .drop-menu-select {
+        background-color: <%=global.colors.b %>;
+        color: <%=global.colors.e %>;
+        font-size: 1em;
+        padding: <%= global.common.em.marginPadding %>em;
+    }
+</style>

@@ -1,0 +1,135 @@
+<style>
+    #alert {
+        width: auto;
+        height: auto;
+        z-index: <%= global.zIndex.alert %>;
+        overflow: hidden;
+        opacity: 0;
+        font-size: 0;
+        top: <%= topBar.height + alert.top %>px;
+        left: 50%;
+        transform: translateX(-50%);
+        position: absolute;
+        border-radius: <%= global.radius %>px;
+        display: flex;
+        white-space: nowrap;
+        cursor: pointer;
+    }
+
+    #alert[color=blue] {
+        background-color: #2A93E4;
+    }
+
+    #alert[color=yellow] {
+        background-color: #eac546;
+    }
+
+    #alert[color=red] {
+        background-color: #ea4646;
+    }
+
+    @keyframes removeAlert {
+        0% {
+            opacity: 1;
+            font-size: 100%;
+        }
+
+        40% {
+            font-size: 110%;
+        }
+
+        70% {
+            opacity: .8;
+            font-size: 100%;
+        }
+
+        100% {
+            opacity: 0;
+            font-size: 0;
+        }
+    }
+
+    @keyframes showAlert {
+        0% {
+            opacity: 0;
+            font-size: 0;
+        }
+
+        30% {
+            opacity: .8;
+            font-size: 100%;
+        }
+
+        60% {
+            font-size: 104%;
+        }
+
+        100% {
+            opacity: 1;
+            font-size: 100%;
+        }
+    }
+
+    /*--------------*/
+
+    #alert button {
+        font-size: 1.6em;
+        padding: <%= global.common.em.marginPadding %>em;
+        border-radius: 0;
+    }
+
+    /*--------------*/
+
+    #alert[color=blue] button {
+        background-color: #0265B2;
+        color: #2A93E4;
+    }
+
+    #alert[color=blue] #yellow,
+    #alert[color=blue] #red {
+        display: none;
+    }
+
+    /*--------------*/
+
+    #alert[color=yellow] button {
+        background-color: #c1970a;
+        color: #eac546;
+    }
+
+    #alert[color=yellow] #blue,
+    #alert[color=yellow] #red {
+        display: none;
+    }
+
+    /*--------------*/
+
+    #alert[color=red] button {
+        background-color: #c10a0a;
+        color: #ea4646;
+    }
+
+    #alert[color=red] #blue,
+    #alert[color=red] #yellow {
+        display: none;
+    }
+
+    /*--------------*/
+
+    #alert p {
+        font-size: 1.2em;
+        margin: <%= global.common.em.marginPadding %>em;
+    }
+
+    #alert[color=blue] p {
+        color: #0265B2;
+    }
+
+    #alert[color=yellow] p {
+        color: #c1970a;
+    }
+
+    #alert[color=red] p {
+        color: #c10a0a;
+    }
+</style>

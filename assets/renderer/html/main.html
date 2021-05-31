@@ -1,12 +1,14 @@
 <div id="main">
-    <div class="bar-top">
+    <div id="main-background" onclick="removeMenu()"></div>
+
+    <div class="top-bar">
         <div id="font">
-            <button class="icofont-caret-right" id="menu-button" onclick="showRemoveMenu()"></button>
+            <button class="icofont-caret-right menu-button" onclick="showMenu()"></button>
         </div>
 
-        <div id="tab-area">
-            <label class="tab" id="tab1">
-                <input type="radio" name="tab" onclick="setActiveTab('tab1')">
+        <div class="tab-area" id="main-tab-area">
+            <label class="tab" id="tab-1" active="true">
+                <input id="tab-1-input" type="radio" name="tab" onclick="setActiveTab('1')" checked>
                 <div class="checkmark"></div>
 
                 <p>
@@ -15,8 +17,8 @@
 
                 <button class="icofont-close"></button>
             </label>
-            <label class="tab" id="tab2">
-                <input type="radio" name="tab" onclick="setActiveTab('tab2')">
+            <label class="tab" id="tab-2">
+                <input id="tab-2-input" type="radio" name="tab" onclick="setActiveTab('2')">
                 <div class="checkmark"></div>
 
                 <p>
@@ -25,8 +27,8 @@
 
                 <button class="icofont-close"></button>
             </label>
-            <label class="tab" id="tab3">
-                <input type="radio" name="tab" onclick="setActiveTab('tab3')">
+            <label class="tab" id="tab-3">
+                <input id="tab-3-input" type="radio" name="tab" onclick="setActiveTab('3')">
                 <div class="checkmark"></div>
 
                 <p>
@@ -39,11 +41,18 @@
     </div>
 
     <div class="bottom-area">
-        <div id="code-line-bar">
+        <div class="code-line-bar" id="main-code-line-bar">
 
         </div>
 
-        <div id="text-area" contenteditable="true">
+        <div class="file-area" id="main-file-area">
+            <div class="file" id="file-1" contenteditable="true" spellcheck="false" active="true"></div>
+
+            <div class="file" id="file-2" contenteditable="true" spellcheck="false"></div>
+
+            <div class="file" id="file-3" contenteditable="true" spellcheck="false"></div>
         </div>
+
+        <div class="file javascript" id="copie"></div>
     </div>
 </div>

@@ -1,0 +1,89 @@
+<style>
+    .tab {
+        margin-top: <%= topBar.height - tab.height %>px;
+        width: auto;
+        max-width: <%= tab.width %>px;
+        height: <%= tab.height %>px;
+        display: flex;
+        position: sticky;
+        cursor: pointer;
+    }
+
+    .tab[active=true] {
+        z-index: 1;
+    }
+
+    .tab+.tab {
+        margin-left: 25px;
+    }
+
+    .tab input {
+        display: none;
+    }
+
+    .tab .checkmark {
+        width: <%= tab.width %>px;
+        height: <%= tab.height %>px;
+        background-color: <%= global.colors.b %>;
+        position: absolute;
+    }
+
+    .tab .checkmark::before {
+        content: '';
+        position: absolute;
+        top: <%= topBar.height - tab.height %>px;
+        width: <%= tab.height %>px;
+        height: 50px;
+        background-color: <%= global.colors.b %>;
+        transform: rotate(30deg);
+        margin-left: -15px;
+    }
+
+    .tab .checkmark::after {
+        content: '';
+        position: absolute;
+        top: <%= topBar.height - tab.height %>px;
+        width: <%= tab.height %>px;
+        height: 50px;
+        background-color: <%= global.colors.b %>;
+        transform: rotate(-30deg);
+        margin-left: 135px;
+    }
+
+    .tab input:checked~.checkmark {
+        position: absolute;
+        background-color: <%= global.colors.a %>;
+    }
+
+    .tab input:checked~.checkmark::before {
+        background-color: <%= global.colors.a %>;
+    }
+
+    .tab input:checked~.checkmark::after {
+        background-color: <%= global.colors.a %>;
+    }
+
+    .tab p {
+        width: <%= tab.width - tab.button.size - (4 * global.common.px.marginPadding) %>px;
+        font-size: 14px;
+        margin: <%= global.common.px.marginPadding %>px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        z-index: 1;
+    }
+
+    .tab button {
+        margin: <%= global.common.px.marginPadding %>px;
+        width: <%= tab.button.size %>px;
+        height: <%= tab.button.size %>px;
+        font-size: 15px;
+        z-index: 1;
+        color: <%= global.colors.c %>;
+        position: relative;
+    }
+
+    .tab button:hover {
+        color: <%= global.colors.d %>;
+    }
+</style>

@@ -1,19 +1,62 @@
 <div id="menu">
-    <div class="bar-top">
-        <label class="tab">
-            <input type="radio" name="display" checked="true">
+    <div class="top-bar">
+        <div class="tab-area">
+            <label class="tab" id="recent-files-tab" active="true">
+                <input id="recent-files-tab-input" type="radio" name="menu" onclick="setMenuActiveTab('recent-files')"
+                    checked>
+                <div class="checkmark"></div>
 
-            <div class="checkmark"></div>
+                <p id="interface.menu.recent-files">
+                    recent-files.display
+                </p>
+            </label>
+            <label class="tab" id="settings-tab">
+                <input id="settings-tab-input" type="radio" name="menu" onclick="setMenuActiveTab('settings')">
+                <div class="checkmark"></div>
 
-            <p id="interface.menu.title">
-                recent-files.display
-            </p>
-        </label>
+                <p id="interface.menu.settings">
+                    settings.display
+                </p>
+            </label>
+        </div>
 
-        <button class="icofont-caret-left" id="menu-button" onclick="showRemoveMenu()"></button>
+        <button class="icofont-caret-left menu-button" onclick="removeMenu()"></button>
     </div>
 
     <div class="bottom-area">
-        <button class="icofont-settings" id="settings-button" onclick="showSettings()"></button>
+        <div class="file-area">
+            <div class="file" id="recent-files-page">
+
+            </div>
+
+            <div class="file" id="settings-page">
+                <div id="centered-area">
+                    <h1 id="settings.lang.title">
+                        Default language
+                    </h1>
+
+                    <div class="offset-area">
+                        <select class="drop-menu-select" id="select-lang" name="lang" size="1"
+                            onchange="applyChangeLang()">
+                            <option id="en" value="en">English
+                            <option id="fr" value="fr">Français
+                        </select>
+                    </div>
+
+                    <h1 id="settings.settings.title">
+                        Settings
+                    </h1>
+
+                    <div class="offset-area">
+                        <p id="settings.settings.reset">
+                            Reset settings
+                        </p>
+
+                        <button class="icofont-spinner-alt-3" id="reset-settings-button"
+                            onclick="resetSettings()"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

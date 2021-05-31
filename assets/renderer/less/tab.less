@@ -1,11 +1,11 @@
-@import "global.less";
+@import "./less-config.less";
 
 .tab {
-    margin-top: @barTopHeight - @tabHeight;
+    margin-top: @topBarHeight - @tabHeight;
     width: auto;
     max-width: @tabWidth;
     height: @tabHeight;
-    display: inline-flex;
+    display: flex;
     position: sticky;
     cursor: pointer;
 }
@@ -81,8 +81,9 @@
     font-size: 15px;
     z-index: 1;
     color: @color3;
+    position: relative;
 }
 
 .tab button:hover {
-    color: @color5;
+    color: @color4;
 }
