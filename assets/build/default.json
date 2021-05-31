@@ -2,16 +2,16 @@
 	"appId": "Voltaire.app",
 	"productName": "Voltaire",
 	"win": {
-		"icon": "assets/renderer/img/icons/icon.ico",
+		"icon": "assets/img/icons/icon.ico",
 		"target": [
 			"nsis"
 		]
 	},
 	"nsis": {
 		"license": "LICENSE.txt",
-		"installerIcon": "assets/renderer/img/icons/installer.ico",
-		"uninstallerIcon": "assets/renderer/img/icons/icon.ico",
-		"installerSidebar": "assets/renderer/img/sidebar/sidebar.bmp",
+		"installerIcon": "assets/img/icons/installer.ico",
+		"uninstallerIcon": "assets/img/icons/icon.ico",
+		"installerSidebar": "assets/img/sidebar/sidebar.bmp",
 		"uninstallDisplayName": "${productName}",
 		"oneClick": false,
 		"allowToChangeInstallationDirectory": true,
